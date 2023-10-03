@@ -14,8 +14,60 @@ function raf(time) {
 }
 requestAnimationFrame(raf)
 
+// TOGGLES
+
+// ANIMATION
+const animationCheckbox = document.getElementById("animationToggle");
+
+function toggleAnimation() {
+  const animationDuration = animationCheckbox.checked ? 0.8 : 0;
+  localStorage.setItem("animationDuration", animationDuration);
+  location.reload();
+}
+
+animationCheckbox.addEventListener("change", toggleAnimation);
+const storedAnimationDuration = localStorage.getItem("animationDuration");
+if (storedAnimationDuration === null) {
+    animationCheckbox.checked = true;
+    toggleAnimation(); 
+  } else {
+    animationCheckbox.checked = parseFloat(storedAnimationDuration) === 0.8;
+}
+
+const animationDuration = parseFloat(localStorage.getItem("animationDuration"));
+
+// INCREASE FONT
+
+const textToggleCheckbox = document.getElementById("textToggle");
+
+function increaseFontSize() {
+  document.body.style.fontSize = "1.5rem";
+}
+
+function resetFontSize() {
+  document.body.style.fontSize = "";
+}
+
+textToggleCheckbox.addEventListener("change", function() {
+  if (textToggleCheckbox.checked) {
+    increaseFontSize();
+    localStorage.setItem("fontSizePreference", "20rem");
+  } else {
+    resetFontSize();
+    localStorage.removeItem("fontSizePreference");
+  }
+});
+
+const storedFontSize = localStorage.getItem("fontSizePreference");
+
+if (storedFontSize === "1.5rem") {
+  textToggleCheckbox.checked = true;
+  increaseFontSize();
+}
+
+
+
 // GSAP
-let animationDuration = 0.8;
 let homeText = new SplitType("[home-heading]")
 
 gsap.timeline()
@@ -35,5 +87,5 @@ document.querySelectorAll("[data-section]").forEach((section) => {
   });
 });
 
-console.log('Im Home')
+
 
