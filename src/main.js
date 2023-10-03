@@ -89,3 +89,20 @@ document.querySelectorAll("[data-section]").forEach((section) => {
 
 
 
+// FAQ
+  
+  const faq = document.querySelectorAll(".faq")
+
+  faq.forEach((faq) => {
+    const faqAnswer = faq.querySelector(".faq_answer");
+
+    faq.addEventListener("click", function() {
+      faqAnswer.classList.toggle("active")
+      faq.classList.toggle("active")
+
+    })
+  })
+
+
+
+
