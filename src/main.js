@@ -14,6 +14,17 @@ function raf(time) {
 }
 requestAnimationFrame(raf)
 
+//NAV MENU
+
+document.addEventListener('DOMContentLoaded', function() {
+  const menuIcon = document.querySelector('.nav_menu-icon');
+  const navLinkWrapper = document.querySelector('.nav_link-wrapper');
+
+  menuIcon.addEventListener('click', function() {
+    navLinkWrapper.classList.toggle('is-active');
+  });
+});
+
 // TOGGLES
 
 // ANIMATION
