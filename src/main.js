@@ -153,6 +153,7 @@ aboutPopup.forEach((aboutPopup) => {
   const close = aboutPopup.querySelector(".icon_close");
 
   button.addEventListener("click", function () {
+    document.body.style.overflow = 'hidden';
     wrapper.style.display = "flex";
     wrapper.style.opacity = "1";
     // Use a setTimeout to force the browser to apply the initial styles first
@@ -160,10 +161,10 @@ aboutPopup.forEach((aboutPopup) => {
       content.style.transform = "translateY(0)";
       content.style.opacity = "1";
     }, 0);
-    document.body.style.overflow = 'hidden';
   });
 
   close.addEventListener("click", function () {
+    document.body.style.overflow = 'auto';
     content.style.transform = "translateY(100vh)"; // Move content down 100vh
     content.style.opacity = "0";
 
@@ -176,7 +177,7 @@ aboutPopup.forEach((aboutPopup) => {
       }, 800); // Replace with the actual duration of your CSS transition
     }, 800);
 
-    document.body.style.overflow = 'auto';
+    
   });
 });
 
