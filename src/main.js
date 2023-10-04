@@ -6,6 +6,7 @@ import SplitType from 'split-type';
 import Lenis from '@studio-freight/lenis'
 import Swiper from 'swiper';
 
+console.log("notlive")
 
 const lenis = new Lenis()
 
