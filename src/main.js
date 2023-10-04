@@ -6,14 +6,6 @@ import SplitType from 'split-type';
 import Lenis from '@studio-freight/lenis'
 import Swiper from 'swiper';
 
-// LENIS
-const lenis = new Lenis()
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-requestAnimationFrame(raf)
-
 
 
 // TOGGLES
@@ -161,6 +153,7 @@ aboutPopup.forEach((aboutPopup) => {
       content.style.transform = "translateY(0)";
       content.style.opacity = "1";
     }, 0);
+    document.body.style.overflow = 'hidden';
   });
 
   close.addEventListener("click", function () {
@@ -170,9 +163,10 @@ aboutPopup.forEach((aboutPopup) => {
     setTimeout(() =>{
       wrapper.style.opacity = "0";
       
-  wrapper.style.display = "none";
+      wrapper.style.display = "none";
        
     }, 0);
+    document.body.style.overflow = 'auto';
   });
 
 });
