@@ -275,3 +275,10 @@ function preloadURL() {
 
 
 
+document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
+document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
+document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; fadeOutAndSlideNext() });
+document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); wellbeingSelected() });
+document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); wellbeingSelected() });
+document.getElementById('service-btn-yes').addEventListener('click', function() { nhs = 'yes'; updateURL(); });
+document.getElementById('service-btn-no').addEventListener('click', function() { nhs = 'no'; updateURL(); });
