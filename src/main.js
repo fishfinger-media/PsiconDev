@@ -169,7 +169,11 @@ aboutPopup.forEach((aboutPopup) => {
 
     setTimeout(() =>{
       wrapper.style.opacity = "0";
-      wrapper.style.display = "none";
+      setTimeout(() =>{
+        wrapper.style.display = "none";
+       
+  
+      }, 0);
 
     }, 0);
   });
