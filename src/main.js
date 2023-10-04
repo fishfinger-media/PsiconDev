@@ -6,6 +6,7 @@ import SplitType from 'split-type';
 import Lenis from '@studio-freight/lenis'
 import Swiper from 'swiper';
 
+
 const lenis = new Lenis()
 
 
@@ -69,6 +70,7 @@ if (storedFontSize === "1.5rem") {
 
 
 
+gsap.registerPlugin(ScrollTrigger);
 // GSAP
 let homeText = new SplitType("[home-heading]")
 
@@ -221,6 +223,19 @@ function fadeOutAndSlideNext() {
   }
 }
 
+
+function wellbeingSelected() {
+  // Check the value of the 'help' variable
+  if (help === 'wellbeing') {
+    // Run the 'updateURL()' function if 'help' is 'wellbeing'
+    updateURL();
+  }else  {
+    fadeOutAndSlideNext()
+  }
+
+}
+
+
 // OPEN SERVICE PICKER
 const serviceNextElements = document.querySelectorAll("[service-open]");
 serviceNextElements.forEach(function (element) {
@@ -256,12 +271,6 @@ function preloadURL() {
   document.body.appendChild(a);
 }
 
-document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); fadeOutAndSlideNext() });
-document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); fadeOutAndSlideNext() });
-document.getElementById('service-btn-yes').addEventListener('click', function() { nhs = 'yes'; updateURL(); });
-document.getElementById('service-btn-no').addEventListener('click', function() { nhs = 'no'; updateURL(); });
+
 
 
