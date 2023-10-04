@@ -92,6 +92,21 @@ document.querySelectorAll("[data-section]").forEach((section) => {
   });
 });
 
+document.querySelectorAll("[data-card]").forEach((card, index) => {
+  gsap.from(card, {
+    opacity: 0,
+    y: 50,
+    ease: "power4.out",
+    duration: animationDuration,
+    delay: 0.2 + 0.05 * index, // Add 0.5ms delay for each iteration
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%",
+      end: "bottom 85%",
+      toggleActions: "play none none none",
+    },
+  });
+});
 
 
 // FAQ
