@@ -142,6 +142,40 @@ hoverCard.forEach((hoverCard) => {
   });
 });
 
+// ABOUT POPUP
+
+const aboutPopup = document.querySelectorAll('#bioCard');
+
+aboutPopup.forEach((aboutPopup) => {
+  const wrapper = aboutPopup.querySelector(".card_popup-wrapper");
+  const content = aboutPopup.querySelector(".card_popup-container");
+  const button = aboutPopup.querySelector("#openPopup");
+  const close = aboutPopup.querySelector(".icon_close");
+
+  button.addEventListener("click", function () {
+    wrapper.style.display = "flex";
+    wrapper.style.opacity = "1";
+    // Use a setTimeout to force the browser to apply the initial styles first
+    setTimeout(() => {
+      
+      content.style.transform = "translateY(0)";
+      content.style.opacity = "1";
+    }, 0);
+  });
+
+  close.addEventListener("click", function () {
+    content.style.transform = "translateY(100)";
+    content.style.opacity = "0";
+
+    setTimeout(() =>{
+      wrapper.style.opacity = "0";
+      wrapper.style.display = "none";
+
+    }, 0);
+  });
+
+});
+
 
 
 
@@ -222,3 +256,5 @@ document.getElementById('service-btn-adults').addEventListener('click', function
 document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); fadeOutAndSlideNext() });
 document.getElementById('service-btn-yes').addEventListener('click', function() { nhs = 'yes'; updateURL(); });
 document.getElementById('service-btn-no').addEventListener('click', function() { nhs = 'no'; updateURL(); });
+
+
