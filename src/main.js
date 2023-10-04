@@ -6,7 +6,15 @@ import SplitType from 'split-type';
 import Lenis from '@studio-freight/lenis'
 import Swiper from 'swiper';
 
+const lenis = new Lenis()
 
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
 
 // TOGGLES
 
@@ -149,7 +157,6 @@ aboutPopup.forEach((aboutPopup) => {
     wrapper.style.opacity = "1";
     // Use a setTimeout to force the browser to apply the initial styles first
     setTimeout(() => {
-      
       content.style.transform = "translateY(0)";
       content.style.opacity = "1";
     }, 0);
@@ -157,19 +164,23 @@ aboutPopup.forEach((aboutPopup) => {
   });
 
   close.addEventListener("click", function () {
-    content.style.transform = "translateY(100)";
+    content.style.transform = "translateY(100vh)"; // Move content down 100vh
     content.style.opacity = "0";
 
-    setTimeout(() =>{
+    setTimeout(() => {
       wrapper.style.opacity = "0";
-      
-      wrapper.style.display = "none";
-       
-    }, 0);
+
+      // After the content animation is complete, hide the wrapper
+      setTimeout(() => {
+        wrapper.style.display = "none";
+      }, 800); // Replace with the actual duration of your CSS transition
+    }, 800);
+
     document.body.style.overflow = 'auto';
   });
-
 });
+
+
 
 
 
