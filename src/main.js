@@ -170,7 +170,7 @@ aboutPopup.forEach((aboutPopup) => {
     setTimeout(() =>{
       wrapper.style.opacity = "0";
       
-        wrapper.style.display = "none";
+  wrapper.style.display = "none";
        
     }, 0);
   });
