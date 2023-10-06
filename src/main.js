@@ -168,8 +168,7 @@ function playScrollTriggerAnimation(hoverCard) {
     },
     onLeave: () => {
       tl.reverse();
-    },
-    markers: true,
+    }
   });
 }
 
