@@ -14,7 +14,7 @@ const lenis = new Lenis()
 function raf(time) {
   lenis.raf(time)
   requestAnimationFrame(raf)
-  autoResize = true
+  
 }
 
 requestAnimationFrame(raf)
@@ -112,17 +112,23 @@ document.querySelectorAll("[data-card]").forEach((card, index) => {
 
 // FAQ
   
-  const faq = document.querySelectorAll(".faq")
+const faq = document.querySelectorAll(".faq");
 
-  faq.forEach((faq) => {
-    const faqAnswer = faq.querySelector(".faq_answer");
+faq.forEach((faq) => {
+  const faqAnswer = faq.querySelector(".faq_answer");
 
-    faq.addEventListener("click", function() {
-      faqAnswer.classList.toggle("active")
-      faq.classList.toggle("active")
+  faq.addEventListener("click", function() {
+    faqAnswer.classList.toggle("active");
+    faq.classList.toggle("active");
 
-    })
-  })
+    
+
+    // Wait for 0.8 seconds (800 milliseconds) and then set lenis.autoResize to true
+    setTimeout(function() {
+      lenis.resize()
+    }, 800); // 800 milliseconds = 0.8 seconds
+  });
+});
 
 
 // HOVER CARD
