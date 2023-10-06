@@ -14,6 +14,7 @@ const lenis = new Lenis()
 function raf(time) {
   lenis.raf(time)
   requestAnimationFrame(raf)
+  autoResize = true
 }
 
 requestAnimationFrame(raf)
@@ -171,6 +172,8 @@ aboutPopup.forEach((aboutPopup) => {
   const close = aboutPopup.querySelector(".icon_close");
 
   button.addEventListener("click", function () {
+    
+    lenis.isStopped = true;
     document.body.style.overflow = 'hidden';
     wrapper.style.display = "flex";
     wrapper.style.opacity = "1";
@@ -182,7 +185,9 @@ aboutPopup.forEach((aboutPopup) => {
   });
 
   close.addEventListener("click", function () {
+    lenis.isStopped = false;
     document.body.style.overflow = 'auto';
+
     content.style.transform = "translateY(100vh)"; // Move content down 100vh
     content.style.opacity = "0";
 
@@ -197,6 +202,7 @@ aboutPopup.forEach((aboutPopup) => {
 
     
   });
+
 });
 
 
