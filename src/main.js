@@ -126,40 +126,75 @@ document.querySelectorAll("[data-card]").forEach((card, index) => {
 
 
 // HOVER CARD
+const hoverCards = document.querySelectorAll(".card_hover-wrapper");
 
-const hoverCard = document.querySelectorAll(".card_hover-wrapper");
-
-hoverCard.forEach((hoverCard) => {
+function playMouseAnimation(hoverCard) {
   const hoverTop = hoverCard.querySelector(".card_hover-top");
   const hoverBottom = hoverCard.querySelector(".card_hover-bottom");
   const gradientBalls = hoverCard.querySelectorAll(".gradient-ball");
 
-  hoverCard.addEventListener("mouseenter", function () {
-    hoverTop.style.transform = "scale(0.8)";
-    hoverTop.style.opacity = "0";
-    hoverBottom.style.transform = "scale(1)";
-    hoverBottom.style.opacity = "1";
+  const tl = gsap.timeline({ paused: true });
 
-    gradientBalls.forEach((ball) => {
-      ball.style.opacity = "1";
-      ball.style.transform = "scale(1)";
-    }); 
-      
+  tl.to(hoverTop, { scale: 0.8, opacity: 0 });
+  tl.to(hoverBottom, { scale: 1, opacity: 1 });
+  tl.to(gradientBalls, { scale: 1, opacity: 1 });
+
+  hoverCard.addEventListener("mouseenter", () => {
+    tl.play();
   });
 
-  hoverCard.addEventListener("mouseleave", function () {
-    hoverTop.style.transform = "scale(1)";
-    hoverTop.style.opacity = "1";
-    hoverBottom.style.transform = "scale(0.8)";
-    hoverBottom.style.opacity = "0";
-
-    gradientBalls.forEach((ball) => {
-      ball.style.opacity = "0";
-      ball.style.transform = "scale(0.5)";
-
-    });
+  hoverCard.addEventListener("mouseleave", () => {
+    tl.reverse();
   });
-});
+}
+
+function playScrollTriggerAnimation(hoverCard) {
+  const hoverTop = hoverCard.querySelector(".card_hover-top");
+  const hoverBottom = hoverCard.querySelector(".card_hover-bottom");
+  const gradientBalls = hoverCard.querySelectorAll(".gradient-ball");
+
+  const tl = gsap.timeline({ paused: true });
+
+  tl.to(hoverTop, { scale: 0.8, opacity: 0 });
+  tl.to(hoverBottom, { scale: 1, opacity: 1 });
+  tl.to(gradientBalls, { scale: 1, opacity: 1 });
+
+  ScrollTrigger.create({
+    trigger: hoverCard,
+    start: "top 70%",
+    end: "bottom 30%",
+    onEnter: () => {
+      tl.play();
+    },
+    onLeave: () => {
+      tl.reverse();
+    },
+    markers: true,
+  });
+}
+
+function handleWindowSize() {
+  const screenWidth = window.innerWidth;
+
+  hoverCards.forEach((hoverCard) => {
+    if (screenWidth > 991) {
+      // Use mouse-based animation
+      playMouseAnimation(hoverCard);
+    } else {
+      // Use ScrollTrigger-based animation
+      playScrollTriggerAnimation(hoverCard);
+    }
+  });
+}
+
+// Initial check for window size
+handleWindowSize();
+
+// Listen for window resize events
+window.addEventListener("resize", handleWindowSize);
+
+
+
 
 // ABOUT POPUP
 
