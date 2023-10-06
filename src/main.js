@@ -78,16 +78,16 @@ let homeText = new SplitType("[home-heading]")
 
 gsap.timeline()
   .from(".section_home-hero", {opacity:0, yPercent: 10, duration:animationDuration })
-  .from(homeText.chars, {opacity:0, yPercent: 40, stagger: {amount: 0.6}, ease:"back", duration: animationDuration}, animationDuration/2)
-  .from("[home-fade]", {opacity:0, yPercent: 25, ease:"back", duration:animationDuration},animationDuration/2)
+  .from(homeText.chars, {opacity:0, yPercent: 20, stagger: {amount: 0.6}, ease:"back", duration: animationDuration}, animationDuration/2)
+  .from("[home-fade]", {opacity:0, yPercent: 20, ease:"back", duration:animationDuration},animationDuration/2)
   .from("[home-image]", {opacity:0, yPercent: 5, ease:"back", duration:animationDuration*2},animationDuration/2)
 
 document.querySelectorAll("[data-section]").forEach((section) => {
-  gsap.from(section, {opacity: 0, y: 128, ease: "power4.out", duration: animationDuration, delay:0.2,
+  gsap.from(section, {opacity: 0, y: 10, ease: "power4.out", duration: animationDuration, delay:0.2,
   scrollTrigger: {
     trigger: section,
-    start: "top 80%",
-    end: "bottom 80%",
+    start: "top 85%",
+    end: "bottom 85%",
     toggleActions: "play none none none"
   }
   });
@@ -99,7 +99,7 @@ document.querySelectorAll("[data-card]").forEach((card, index) => {
     y: 50,
     ease: "power4.out",
     duration: animationDuration,
-    delay: 0.2 + 0.05 * index, // Add 0.5ms delay for each iteration
+    delay: 0.2 + 0.03 * index, // Add 0.5ms delay for each iteration
     scrollTrigger: {
       trigger: card,
       start: "top 85%",
