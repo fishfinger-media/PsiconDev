@@ -16,7 +16,7 @@ console.log("notlive")
 const animationCheckbox = document.getElementById("animationToggle");
 
 function toggleAnimation() {
-  const animationDuration = animationCheckbox.checked ? 0.8 : 0;
+  const animationDuration = animationCheckbox.checked ? 0.8 : -0.1;
   localStorage.setItem("animationDuration", animationDuration);
   location.reload();
 }
