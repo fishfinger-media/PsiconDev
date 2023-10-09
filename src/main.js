@@ -292,17 +292,6 @@ function fadeOutAndSlideNext() {
 }
 
 
-function wellbeingSelected() {
-  // Check the value of the 'help' variable
-  if (help === 'wellbeing') {
-    // Run the 'updateURL()' function if 'help' is 'wellbeing'
-    updateURL();
-  }else  {
-    fadeOutAndSlideNext()
-  }
-
-}
-
 
 // OPEN SERVICE PICKER
 const serviceNextElements = document.querySelectorAll("[service-open]");
@@ -323,7 +312,7 @@ serviceBackElements.forEach(function (element) {
 // URL GENERATION
 let help = '';
 let person = '';
-let nhs = '';
+
 
 function updateURL() {
   const url = `/services/${help}/${person}`;
@@ -344,8 +333,6 @@ function preloadURL() {
 
 document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
 document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); wellbeingSelected() });
-document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); wellbeingSelected() });
-document.getElementById('service-btn-yes').addEventListener('click', function() { nhs = 'yes'; updateURL(); });
-document.getElementById('service-btn-no').addEventListener('click', function() { nhs = 'no'; updateURL(); });
+document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; preloadURL(); fadeOutAndSlideNext() });
+document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); updateURL(); });
+document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); updateURL(); });
