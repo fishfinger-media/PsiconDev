@@ -8,16 +8,7 @@ import Swiper from 'swiper';
 
 console.log("notlive")
 
-const lenis = new Lenis()
 
-
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-  
-}
-
-requestAnimationFrame(raf)
 
 // TOGGLES
 
@@ -46,12 +37,27 @@ const animationDuration = parseFloat(localStorage.getItem("animationDuration"));
 const textToggleCheckbox = document.getElementById("textToggle");
 
 function increaseFontSize() {
-  document.body.style.fontSize = "1.5rem";
+  const allElements = document.querySelectorAll('*');
+  allElements.forEach(function(element) {
+    const computedStyle = window.getComputedStyle(element);
+    const currentFontSize = parseFloat(computedStyle.fontSize);
+    const newFontSize = currentFontSize + 2;
+    element.style.fontSize = newFontSize + 'px';
+    lenis.resize
+  });
+  
 }
 
 function resetFontSize() {
-  document.body.style.fontSize = "";
+  const allElements = document.querySelectorAll('*');
+  allElements.forEach(function(element) {
+    element.style.fontSize = '';
+    lenis.resize
+  });
+  
 }
+
+
 
 textToggleCheckbox.addEventListener("change", function() {
   if (textToggleCheckbox.checked) {
