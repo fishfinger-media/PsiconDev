@@ -7,30 +7,91 @@ import Lenis from '@studio-freight/lenis'
 import Swiper from 'swiper';
 
 console.log("notlive")
+gsap.registerPlugin(ScrollTrigger);
 
 
 
-// TOGGLES
+// GSAP
 
-// ANIMATION
-const animationCheckbox = document.getElementById("animationToggle");
+// Function to run GSAP animations
+function runAnimations() {
+  
+  
+// GSAP
+let homeText = new SplitType("[home-heading]")
 
-function toggleAnimation() {
-  const animationDuration = animationCheckbox.checked ? 0.8 : 0;
-  localStorage.setItem("animationDuration", animationDuration);
-  location.reload();
+gsap.timeline()
+  .from(".section_home-hero", {opacity:0, yPercent: 10, duration:0.8 })
+  .from(homeText.chars, {opacity:0, yPercent: 20, stagger: {amount: 0.6}, ease:"back", duration: 0.8}, 0.4)
+  .from("[home-fade]", {opacity:0, yPercent: 20, ease:"back", duration:0.8},0.4)
+  .from("[home-image]", {opacity:0, yPercent: 5, ease:"back", duration:0.8*2},0.4)
+
+document.querySelectorAll("[data-section]").forEach((section) => {
+  gsap.from(section, {opacity: 0, y: 10, ease: "power4.out", duration: 0.8, delay:0.2,
+  scrollTrigger: {
+    trigger: section,
+    start: "top 85%",
+    end: "bottom 85%",
+    toggleActions: "play none none none"
+  }
+  });
+});
+
+document.querySelectorAll("[data-card]").forEach((card, index) => {
+  gsap.from(card, {
+    opacity: 0,
+    y: 50,
+    ease: "power4.out",
+    duration: 0.8,
+    delay: 0.2 + 0.03 * index, // Add 0.5ms delay for each iteration
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%",
+      end: "bottom 85%",
+      toggleActions: "play none none none",
+    },
+  });
+});
+
+
+
 }
 
-animationCheckbox.addEventListener("change", toggleAnimation);
-const storedAnimationDuration = localStorage.getItem("animationDuration");
-if (storedAnimationDuration === null) {
-    animationCheckbox.checked = true;
-    toggleAnimation(); 
+// Function to save the checkbox state to localStorage
+function saveCheckboxState() {
+  const checkbox = document.getElementById("animationToggle");
+  localStorage.setItem("animationEnabled", checkbox.checked);
+}
+
+// Function to load the checkbox state from localStorage
+function loadCheckboxState() {
+  const checkbox = document.getElementById("animationToggle");
+  const animationEnabled = localStorage.getItem("animationEnabled");
+
+  if (animationEnabled !== null) {
+    checkbox.checked = JSON.parse(animationEnabled);
+  }
+
+  // Check the initial state and run animations if it's checked
+  if (checkbox.checked) {
+    runAnimations();
+  }
+}
+
+// Run this function when the page loads to load the checkbox state
+window.addEventListener("load", loadCheckboxState);
+
+// Run this function when the checkbox changes state
+document.getElementById("animationToggle").addEventListener("change", function() {
+  saveCheckboxState();
+  if (this.checked) {
+    runAnimations();
   } else {
-    animationCheckbox.checked = parseFloat(storedAnimationDuration) === 0.8;
-}
+    // Refresh the page if unchecked
+    location.reload();
+  }
+});
 
-const animationDuration = parseFloat(localStorage.getItem("animationDuration"));
 
 // INCREASE FONT
 
@@ -76,46 +137,6 @@ if (storedFontSize === "1.5rem") {
   increaseFontSize();
 }
 
-
-
-gsap.registerPlugin(ScrollTrigger);
-// GSAP
-let homeText = new SplitType("[home-heading]")
-
-gsap.timeline()
-  .from(".section_home-hero", {opacity:0, yPercent: 10, duration:animationDuration })
-  .from(homeText.chars, {opacity:0, yPercent: 20, stagger: {amount: 0.6}, ease:"back", duration: animationDuration}, animationDuration/2)
-  .from("[home-fade]", {opacity:0, yPercent: 20, ease:"back", duration:animationDuration},animationDuration/2)
-  .from("[home-image]", {opacity:0, yPercent: 5, ease:"back", duration:animationDuration*2},animationDuration/2)
-
-document.querySelectorAll("[data-section]").forEach((section) => {
-  gsap.from(section, {opacity: 0, y: 10, ease: "power4.out", duration: animationDuration, delay:animationDuration/4,
-  scrollTrigger: {
-    trigger: section,
-    start: "top 85%",
-    end: "bottom 85%",
-    toggleActions: "play none none none"
-  }
-  });
-});
-
-document.querySelectorAll("[data-card]").forEach((card, index) => {
-  gsap.from(card, {
-    opacity: 0,
-    y: 50,
-    ease: "power4.out",
-    duration: animationDuration,
-    delay: 0.2 + 0.03 * index, // Add 0.5ms delay for each iteration
-    scrollTrigger: {
-      trigger: card,
-      start: "top 85%",
-      end: "bottom 85%",
-      toggleActions: "play none none none",
-    },
-  });
-});
-
-
 // FAQ
   
 const faq = document.querySelectorAll(".faq");
@@ -135,6 +156,8 @@ faq.forEach((faq) => {
     }, 800); // 800 milliseconds = 0.8 seconds
   });
 });
+
+
 
 
 // HOVER CARD
