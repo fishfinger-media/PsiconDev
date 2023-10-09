@@ -102,7 +102,7 @@ function increaseFontSize() {
   allElements.forEach(function(element) {
     const computedStyle = window.getComputedStyle(element);
     const currentFontSize = parseFloat(computedStyle.fontSize);
-    const newFontSize = currentFontSize + 2;
+    const newFontSize = currentFontSize + 4;
     element.style.fontSize = newFontSize + 'px';
     lenis.resize
   });
