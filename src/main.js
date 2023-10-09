@@ -16,7 +16,7 @@ console.log("notlive")
 const animationCheckbox = document.getElementById("animationToggle");
 
 function toggleAnimation() {
-  const animationDuration = animationCheckbox.checked ? 0.8 : -0.1;
+  const animationDuration = animationCheckbox.checked ? 0.8 : 0;
   localStorage.setItem("animationDuration", animationDuration);
   location.reload();
 }
@@ -89,7 +89,7 @@ gsap.timeline()
   .from("[home-image]", {opacity:0, yPercent: 5, ease:"back", duration:animationDuration*2},animationDuration/2)
 
 document.querySelectorAll("[data-section]").forEach((section) => {
-  gsap.from(section, {opacity: 0, y: 10, ease: "power4.out", duration: animationDuration, delay:0.2,
+  gsap.from(section, {opacity: 0, y: 10, ease: "power4.out", duration: animationDuration, delay:animationDuration/4,
   scrollTrigger: {
     trigger: section,
     start: "top 85%",
@@ -271,43 +271,27 @@ const serviceFinder = new Swiper(".swiper", {
   speed: 0,
 });
 
-// SWIPER TRANSITION
+// SWIPER NEXT SLIDE
 function fadeOutAndSlideNext() {
-  // Find the element with the specified class
   const elementToFadeOut = document.querySelector('.swiper_slide.swiper-slide-active');
+    elementToFadeOut.classList.remove('swiper-slide-active')
+    setTimeout(function(){
+      serviceFinder.slideNext()
+    },500);
+}
 
-  if (elementToFadeOut) {
-      // Set the opacity to 0 over 1000ms (1 second)
-      elementToFadeOut.style.transition = 'opacity 500ms';
-      elementToFadeOut.style.opacity = 0;
-
-      // Wait for the animation to complete, then call serviceFinder.slideNext()
-      setTimeout(function () {
-          serviceFinder.slideNext();
-      }, 500);
-  } else {
-      // If the element is not found, just call serviceFinder.slideNext() without animation
-      serviceFinder.slideNext();
-  }
+function fadeOutAndSlidePrev() {
+  const elementToFadeOut = document.querySelector('.swiper_slide.swiper-slide-active');
+    elementToFadeOut.classList.remove('swiper-slide-active')
+    setTimeout(function(){
+      serviceFinder.slidePrev()
+    },500);
 }
 
 
 
-// OPEN SERVICE PICKER
-const serviceNextElements = document.querySelectorAll("[service-open]");
-serviceNextElements.forEach(function (element) {
-  element.addEventListener("click", function () {
-      fadeOutAndSlideNext()
-  });
-});
 
-// BACK BUTTON
-const serviceBackElements = document.querySelectorAll("[service-back]");
-serviceBackElements.forEach(function (element) {
-  element.addEventListener("click", function () {
-      serviceFinder.slidePrev();
-  });
-});
+
 
 // URL GENERATION
 let help = '';
@@ -329,8 +313,8 @@ function preloadURL() {
 }
 
 
-
-
+document.querySelector('[service-open]').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
+document.querySelectorAll("[data-back]").forEach(element => element.addEventListener("click", fadeOutAndSlidePrev));
 document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
 document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
 document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; preloadURL(); fadeOutAndSlideNext() });
