@@ -160,29 +160,6 @@ faq.forEach((faq) => {
 
 
 
-// HOVER CARD
-const hoverCards = document.querySelectorAll(".card_hover-wrapper");
-
-function playMouseAnimation(hoverCard) {
-  const hoverTop = hoverCard.querySelector(".card_hover-top");
-  const hoverBottom = hoverCard.querySelector(".card_hover-bottom");
-  const gradientBalls = hoverCard.querySelectorAll(".gradient-ball");
-
-  const tl = gsap.timeline({ paused: true });
-
-  tl.to(hoverTop, { scale: 0.8, opacity: 0 });
-  tl.to(hoverBottom, { scale: 1, opacity: 1 });
-  tl.to(gradientBalls, { scale: 1, opacity: 1 });
-
-  hoverCard.addEventListener("mouseenter", () => {
-    tl.play();
-  });
-
-  hoverCard.addEventListener("mouseleave", () => {
-    tl.reverse();
-  });
-}
-
 function playScrollTriggerAnimation(hoverCard) {
   const hoverTop = hoverCard.querySelector(".card_hover-top");
   const hoverBottom = hoverCard.querySelector(".card_hover-bottom");
