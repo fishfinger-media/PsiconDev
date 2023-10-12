@@ -5,9 +5,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from 'split-type';
 import Lenis from '@studio-freight/lenis'
 import Swiper from 'swiper';
+import { Navigation, Pagination, Autoplay } from 'swiper';
 
 console.log("notlive")
 gsap.registerPlugin(ScrollTrigger);
+Swiper.use([Autoplay, Pagination, Navigation]);
 
 
 
@@ -158,55 +160,6 @@ faq.forEach((faq) => {
 });
 
 
-
-
-function playScrollTriggerAnimation(hoverCard) {
-  const hoverTop = hoverCard.querySelector(".card_hover-top");
-  const hoverBottom = hoverCard.querySelector(".card_hover-bottom");
-  const gradientBalls = hoverCard.querySelectorAll(".gradient-ball");
-
-  const tl = gsap.timeline({ paused: true });
-
-  tl.to(hoverTop, { scale: 0.8, opacity: 0 });
-  tl.to(hoverBottom, { scale: 1, opacity: 1 });
-  tl.to(gradientBalls, { scale: 1, opacity: 1 });
-
-  ScrollTrigger.create({
-    trigger: hoverCard,
-    start: "top 70%",
-    end: "bottom 30%",
-    onEnter: () => {
-      tl.play();
-    },
-    onLeave: () => {
-      tl.reverse();
-    }
-  });
-}
-
-function handleWindowSize() {
-  const screenWidth = window.innerWidth;
-
-  hoverCards.forEach((hoverCard) => {
-    if (screenWidth > 991) {
-      // Use mouse-based animation
-      playMouseAnimation(hoverCard);
-    } else {
-      // Use ScrollTrigger-based animation
-      playScrollTriggerAnimation(hoverCard);
-    }
-  });
-}
-
-// Initial check for window size
-handleWindowSize();
-
-// Listen for window resize events
-window.addEventListener("resize", handleWindowSize);
-
-
-
-
 // ABOUT POPUP
 
 const aboutPopup = document.querySelectorAll('#bioCard');
@@ -263,9 +216,9 @@ aboutPopup.forEach((aboutPopup) => {
 // SERVICE SLIDER 
 
 // SWIPER
-const serviceFinder = new Swiper(".swiper", {
-  wrapperClass: "swiper_wrapper",
-  slideClass: "swiper_slide",
+const serviceFinder = new Swiper(".swiper.is-service", {
+  wrapperClass: "swiper_wrapper.is-service",
+  slideClass: "swiper_slide.is-service",
   slidesPerView: 1,
   allowTouchMove: false,
   speed: 0,
@@ -273,7 +226,7 @@ const serviceFinder = new Swiper(".swiper", {
 
 // SWIPER NEXT SLIDE
 function fadeOutAndSlideNext() {
-  const elementToFadeOut = document.querySelector('.swiper_slide.swiper-slide-active');
+  const elementToFadeOut = document.querySelector('.swiper_slide.is-service.swiper-slide-active');
     elementToFadeOut.classList.remove('swiper-slide-active')
     setTimeout(function(){
       serviceFinder.slideNext()
@@ -281,7 +234,7 @@ function fadeOutAndSlideNext() {
 }
 
 function fadeOutAndSlidePrev() {
-  const elementToFadeOut = document.querySelector('.swiper_slide.swiper-slide-active');
+  const elementToFadeOut = document.querySelector('.swiper_slide.is-service.swiper-slide-active');
     elementToFadeOut.classList.remove('swiper-slide-active')
     setTimeout(function(){
       serviceFinder.slidePrev()
@@ -320,3 +273,27 @@ document.getElementById('service-btn-adhd').addEventListener('click', function (
 document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; preloadURL(); fadeOutAndSlideNext() });
 document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); updateURL(); });
 document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); updateURL(); });
+
+
+const testimonialSlider = new Swiper(".swiper.is-testimonial", {
+  wrapperClass: "swiper_wrapper.is-testimonial",
+  slideClass: "swiper_slide.is-testimonial",
+  slidesPerView: 1,
+  spaceBetween: 40,
+  allowTouchMove: true,
+  loop:true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+
+  navigation:{
+    nextEl: ".testimonial-swiper_btn.next",
+    prevEl: ".testimonial-swiper_btn.prev",
+    
+  }
+});
