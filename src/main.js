@@ -104,9 +104,7 @@ document.getElementById("animationToggle").addEventListener("change", function()
 
 
 // INCREASE FONT
-
 const textToggleCheckbox = document.getElementById("textToggle");
-
 function increaseFontSize() {
   const allElements = document.querySelectorAll('*');
   allElements.forEach(function(element) {
@@ -118,7 +116,6 @@ function increaseFontSize() {
   });
   
 }
-
 function resetFontSize() {
   const allElements = document.querySelectorAll('*');
   allElements.forEach(function(element) {
@@ -127,9 +124,6 @@ function resetFontSize() {
   });
   
 }
-
-
-
 textToggleCheckbox.addEventListener("change", function() {
   if (textToggleCheckbox.checked) {
     increaseFontSize();
@@ -139,18 +133,14 @@ textToggleCheckbox.addEventListener("change", function() {
     localStorage.removeItem("fontSizePreference");
   }
 });
-
 const storedFontSize = localStorage.getItem("fontSizePreference");
-
 if (storedFontSize === "1.5rem") {
   textToggleCheckbox.checked = true;
   increaseFontSize();
 }
 
 // FAQ
-  
 const faq = document.querySelectorAll(".faq");
-
 faq.forEach((faq) => {
   const faqAnswer = faq.querySelector(".faq_answer");
 
@@ -169,9 +159,7 @@ faq.forEach((faq) => {
 
 
 // ABOUT POPUP
-
 const aboutPopup = document.querySelectorAll('#bioCard');
-
 aboutPopup.forEach((aboutPopup) => {
   const wrapper = aboutPopup.querySelector(".card_popup-wrapper");
   const content = aboutPopup.querySelector(".card_popup-container");
@@ -213,14 +201,6 @@ aboutPopup.forEach((aboutPopup) => {
 });
 
 
-
-
-
-
-// HOMEPAGE
-
-
-
 // SERVICE SLIDER 
 
 // SWIPER
@@ -250,14 +230,10 @@ function fadeOutAndSlidePrev() {
 }
 
 
-
-
-
-
 // URL GENERATION
 let help = '';
 let person = '';
-
+let fees = '';
 
 function updateURL() {
   const url = `/services/${help}/${person}`;
@@ -273,15 +249,38 @@ function preloadURL() {
   document.body.appendChild(a);
 }
 
+function checkWellbeing() {
+    if (help === "wellbeing") {
+      updateURL();
+    } else {
+      fadeOutAndSlideNext()
+    }
+}
+
+function checkFees(){
+  if (fees === "true"){
+    localStorage.setItem('showfees', 'true');
+
+    preloadURL();
+    updateURL()
+  } else if (fees === "false"){
+    localStorage.setItem('showfees', 'false');
+
+    preloadURL();
+    updateURL()
+  }
+}
+
 
 document.querySelector('[service-open]').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
 document.querySelectorAll("[data-back]").forEach(element => element.addEventListener("click", fadeOutAndSlidePrev));
 document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
 document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
 document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; preloadURL(); fadeOutAndSlideNext() });
-document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); updateURL(); });
-document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); updateURL(); });
-
+document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); checkWellbeing(); });
+document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); checkWellbeing(); });
+document.getElementById('fees-btn-true').addEventListener('click', function(){fees='true'; checkFees()})
+document.getElementById('fees-btn-false').addEventListener('click', function(){fees='false'; checkFees()})
 
 const testimonialSlider = new Swiper(".swiper.is-testimonial", {
   wrapperClass: "swiper_wrapper.is-testimonial",
