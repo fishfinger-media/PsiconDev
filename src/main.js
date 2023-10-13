@@ -31,10 +31,10 @@ function runAnimations() {
 let homeText = new SplitType("[home-heading]")
 
 gsap.timeline()
-  .from(".section_home-hero", {opacity:0, yPercent: 10, duration:0.8 })
-  .from(homeText.chars, {opacity:0, yPercent: 20, stagger: {amount: 0.6}, ease:"back", duration: 0.8}, 0.4)
-  .from("[home-fade]", {opacity:0, yPercent: 20, ease:"back", duration:0.8},0.4)
-  .from("[home-image]", {opacity:0, yPercent: 5, ease:"back", duration:0.8*2},0.4)
+  .from(".section_home-hero", {opacity:0, yPercent: 10, duration:0.8, autoAlpha:0 })
+  .from(homeText.chars, {opacity:0, yPercent: 20, stagger: {amount: 0.6}, ease:"back", duration: 0.8, autoAlpha:0}, 0.4)
+  .from("[home-fade]", {opacity:0, yPercent: 20, ease:"back", duration:0.8, autoAlpha:0},0.4)
+  .from("[home-image]", {opacity:0, yPercent: 5, ease:"back", duration:0.8*2, autoAlpha:0},0.4)
 
 document.querySelectorAll("[data-section]").forEach((section) => {
   gsap.from(section, {opacity: 0, y: 10, ease: "power4.out", duration: 0.8, delay:0.2,
@@ -42,7 +42,8 @@ document.querySelectorAll("[data-section]").forEach((section) => {
     trigger: section,
     start: "top 85%",
     end: "bottom 85%",
-    toggleActions: "play none none none"
+    toggleActions: "play none none none",
+    autoAlpha:0
   }
   });
 });
@@ -51,9 +52,11 @@ document.querySelectorAll("[data-card]").forEach((card, index) => {
   gsap.from(card, {
     opacity: 0,
     y: 50,
+    
     ease: "power4.out",
     duration: 0.8,
-    delay: 0.2 + 0.03 * index, // Add 0.5ms delay for each iteration
+    delay: 0.2 + 0.03 * index,
+    autoAlpha:0, // Add 0.5ms delay for each iteration
     scrollTrigger: {
       trigger: card,
       start: "top 85%",
