@@ -271,15 +271,6 @@ function preloadURL() {
 }
 
 
-document.querySelector('[service-open]').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
-document.querySelectorAll("[data-back]").forEach(element => element.addEventListener("click", fadeOutAndSlidePrev));
-document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
-document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; preloadURL(); fadeOutAndSlideNext() });
-document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); updateURL(); });
-document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); updateURL(); });
-
-
 const testimonialSlider = new Swiper(".swiper.is-testimonial", {
   wrapperClass: "swiper_wrapper.is-testimonial",
   slideClass: "swiper_slide.is-testimonial",
@@ -302,3 +293,12 @@ const testimonialSlider = new Swiper(".swiper.is-testimonial", {
     
   }
 });
+
+
+document.querySelector('[service-open]').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
+document.querySelectorAll("[data-back]").forEach(element => element.addEventListener("click", fadeOutAndSlidePrev));
+document.getElementById('service-btn-autism').addEventListener('click', function () { help = 'autism'; fadeOutAndSlideNext() });
+document.getElementById('service-btn-adhd').addEventListener('click', function () { help = 'adhd'; fadeOutAndSlideNext() });
+document.getElementById('service-btn-wellbeing').addEventListener('click', function () { help = 'wellbeing'; preloadURL(); fadeOutAndSlideNext() });
+document.getElementById('service-btn-adults').addEventListener('click', function () { person = 'adults'; preloadURL(); updateURL(); });
+document.getElementById('service-btn-children').addEventListener('click', function() { person = 'children'; preloadURL(); updateURL(); });
