@@ -1,6 +1,4 @@
 import './styles/style.css'
-
-console.log('COUNTRY ROAD TAKE ME HOME')
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Swiper from 'swiper';
